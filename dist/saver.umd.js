@@ -36,8 +36,7 @@
     function downloadImage(url, fileName) {
         return __awaiter$1(this, void 0, void 0, function* () {
             const image = yield fetch(url, {
-                mode: 'cors',
-                credentials: 'include'
+                mode: 'cors'
             });
             const imageBlog = yield image.blob();
             yield downloadBlob(imageBlog, fileName);

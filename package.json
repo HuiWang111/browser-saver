@@ -1,6 +1,6 @@
 {
     "name": "browser-saver",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "main": "index.js",
     "license": "MIT",
     "devDependencies": {
@@ -14,14 +14,16 @@
         "rollup": "^2.58.3",
         "serve": "^12.0.1",
         "ts-jest": "^27.0.7",
+        "ts-node": "^10.4.0",
         "typescript": "^4.4.2"
     },
     "scripts": {
         "test": "jest --watchAll",
         "dist": "tsc --declaration --sourceMap false --downlevelIteration --skipLibCheck --jsx react --module es2015 --target es2015 --outDir dist",
-        "umd": "rollup --config rollup.config.js && cp ./dist/saver.umd.js ./example/saver.js",
+        "umd": "rollup --config rollup.config.js && cp ./dist/saver.umd.js ./example/client/saver.js",
         "build": "npm run dist && npm run umd",
-        "start": "serve example -p 3004"
+        "client": "serve example/client -p 3004",
+        "server": "ts-node example/server/index.ts"
     },
     "files": [
         "dist",

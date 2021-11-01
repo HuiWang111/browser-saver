@@ -8,15 +8,17 @@
 </head>
 <body>
     <button class="image">下载图片</button>
+    <button class="cross-image">跨越下载图片</button>
     <button class="blob">下载Blob</button>
     
     <script src="./saver.js"></script>
     <script>
         const buttonImage = document.querySelector('button.image');
         const buttonBlob = document.querySelector('button.blob');
+        const buttonCrossImage = document.querySelector('button.cross-image');
 
         buttonImage.addEventListener('click', () => {
-            const url = 'http://192.168.146.1:3004/test.jpg';
+            const url = 'http://192.168.95.181:3004/test.jpg';
 
             const saver = new Saver(url);
             saver.download();
@@ -26,6 +28,13 @@
             const blob = new Blob(['这是一个blob文件']);
 
             const saver = new Saver(blob, 'blob.txt');
+            saver.download();
+        });
+
+        buttonCrossImage.addEventListener('click', () => {
+            const url = 'http://192.168.95.181:3005/test-server.jpg';
+
+            const saver = new Saver(url);
             saver.download();
         });
     </script>

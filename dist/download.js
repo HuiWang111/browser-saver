@@ -30,8 +30,7 @@ export function downloadBlob(file, fileName) {
 export function downloadImage(url, fileName) {
     return __awaiter(this, void 0, void 0, function* () {
         const image = yield fetch(url, {
-            mode: 'cors',
-            credentials: 'include'
+            mode: 'cors'
         });
         const imageBlog = yield image.blob();
         yield downloadBlob(imageBlog, fileName);

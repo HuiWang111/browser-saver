@@ -24,8 +24,7 @@ export async function downloadBlob(file: Blob, fileName: string): Promise<void> 
 
 export async function downloadImage(url: string, fileName: string): Promise<void> {
     const image = await fetch(url, {
-        mode: 'cors',
-        credentials: 'include'
+        mode: 'cors'
     });
     const imageBlog = await image.blob();
     await downloadBlob(imageBlog, fileName);
