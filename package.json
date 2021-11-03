@@ -1,8 +1,9 @@
 {
     "name": "browser-saver",
-    "version": "1.0.0",
-    "main": "index.js",
+    "version": "1.0.1",
+    "main": "dist/index.js",
     "license": "MIT",
+    "homepage": "https://github.com/HuiWang111/browser-saver",
     "devDependencies": {
         "@types/jest": "^27.0.2",
         "@types/node": "^16.9.1",
