@@ -31,3 +31,24 @@ const blob = new Blob(['这是一个blob文件']);
 const fileSaver = new FileSaver(blob, 'blob.txt');
 await fileSaver.download();
 ```
+
+- download excel by Stream
+    - use fetch
+    ```js
+    const url = `http://${ip}:3005/api/export-excel`;
+    const res = await fetch(url, {
+        method: 'POST'
+    });
+    
+    const reader = res.body.getReader();
+    const { value } = await reader.read();
+    const saver = new Saver(new Blob([value]), 'test.xlsx');
+    saver.download();
+    ```
+    - use axios
+    ```js
+    const url = `http://${ip}:3005/api/export-excel`;
+    const res = await axios.post(url, null, { responseType: 'arraybuffer' });
+    const saver = new Saver(new Blob([res.data]), 'test.xlsx');
+    saver.download();
+    ```

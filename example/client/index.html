@@ -10,15 +10,21 @@
     <button class="image">下载图片</button>
     <button class="cross-image">跨越下载图片</button>
     <button class="blob">下载Blob</button>
+    <button class="excel">下载Excel</button>
+    <button class="excel1">下载Excel1</button>
     
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./saver.js"></script>
     <script>
         const buttonImage = document.querySelector('button.image');
         const buttonBlob = document.querySelector('button.blob');
         const buttonCrossImage = document.querySelector('button.cross-image');
+        const buttonExcel = document.querySelector('button.excel');
+        const buttonExcel1 = document.querySelector('button.excel1');
+        const ip = '192.168.95.1'
 
         buttonImage.addEventListener('click', () => {
-            const url = 'http://192.168.95.181:3004/test.jpg';
+            const url = `http://${ip}:3004/test.jpg`;
 
             const saver = new Saver(url);
             saver.download();
@@ -32,9 +38,29 @@
         });
 
         buttonCrossImage.addEventListener('click', () => {
-            const url = 'http://192.168.95.181:3005/test-server.jpg';
+            const url = `http://${ip}:3005/test-server.jpg`;
 
             const saver = new Saver(url);
+            saver.download();
+        });
+
+        buttonExcel.addEventListener('click', async () => {
+            const url = `http://${ip}:3005/api/export-excel`;
+
+            const res = await fetch(url, {
+                method: 'POST'
+            });
+            
+            const reader = res.body.getReader();
+            const { value } = await reader.read();
+            const saver = new Saver(new Blob([value]), 'test.xlsx');
+            saver.download();
+        });
+
+        buttonExcel1.addEventListener('click', async () => {
+            const url = `http://${ip}:3005/api/export-excel`;
+            const res = await axios.post(url, null, { responseType: 'arraybuffer' });
+            const saver = new Saver(new Blob([res.data]), 'test.xlsx');
             saver.download();
         });
     </script>
